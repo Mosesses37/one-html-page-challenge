@@ -609,4 +609,11 @@ const entries = [
 		author: "Rupesh Soni",
 		github: "rsoni124"
 	},
+	{
+	        title: "fishing survival game",
+		filename: "fishing.html",
+                description: "a  game about fish and survive",
+		author: "Moses37",
+		github: "Mosesses37"
+	},
 ];
