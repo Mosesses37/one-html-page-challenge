@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>fish</title>
+        <style>
+            body{
+                text-align:center;
+                }
+            #reboot{
+                display:none;
+                }
+        </style>
+    </head>
+    <body>
+        <h1>yes</h1>
+        <p>this is a test</p>
+        <p>get $700 ,get to 6am to win and finish work to win</p>
+        <p>f to fish, e to eat, w to work, d to drink, i for oxygen, s to sell, space to charge</p>
+        <p id="bait">bait:</p>
+        <p id="cur">money:</p>
+        <p id="hun">saturation:</p>
+        <label for="thir">thirst:</label>
+        <progress id="thir" min="0" max="100" value="100"></progress>
+        <p id="power">power:</p>
+        <p id="time">time:</p>
+        <label for="work">work done:</label>
+        <meter min="0" max="100" id="work" value="0"></meter>
+        <br>
+        <button  onclick="oxy()">inhale oxygen</button>
+        <button onclick="fish()">fish</button>
+        <button onclick="eat()">eat</button>
+        <button onclick="drink()">drink water</button>
+        <button onclick="sell()">sell</button>
+        <button onclick="charge()">charge 1%</button>
+        <button id="reboot" onclick="reboot()">reboot power</button>
+        <button onclick="dowork()">do work</button>
+        <p onclick="shop()">shop</p>
+        <p id="loot"></p>
+        
+        <script>
+            let bait = 15;
+            let money = 0;
+            let saturation = 100;
+            let hour = 12;
+            let seconds = 1;
+            let power = 100;
+            let behind = "pm";
+            let line = "fixed";
+            let work = 0;
+            let thirst = 100;
+            let van = 0;
+            let bri;
+            var item;
+            setInterval(()=>{document.getElementById("hun").innerText="saturation:" + saturation},1);
+            setInterval(()=>{document.getElementById("cur").innerText="money:" + money},1);
+            setInterval(()=>{document.getElementById("bait").innerText="bait:" + bait},1);
+            setInterval(()=>{document.getElementById("work").value = work},1);
+            setInterval(()=>{document.getElementById("thir").value = thirst},1);
+            setInterval(()=>{saturation--},500);
+            setInterval(()=>{thirst--},700);
+            setInterval(()=>{van+=0.1},500);
+            setInterval(()=>{document.body.style.filter="blur(" + van + "px)"},1);
+            setInterval(()=>{if(saturation<0){alert("u died");}else{}},1);
+            setInterval(()=>{if(van>3){alert("u died");}else{}},1);
+            setInterval(()=>{if(thirst<0){alert("u died");}else{}},1);
+            setInterval(()=>{document.getElementById("time").innerText="time:" + hour + ":" + seconds + behind},1);
+            setInterval(()=>{seconds+=1},500);
+            setInterval(()=>{if(hour==13){hour = 1;behind = "am"}else{}},1);
+            setInterval(()=>{if(seconds==60){seconds=0;hour++}else{}},1);
+            setInterval(()=>{let wincon;if(work>100&&money>700){wincon=true;}else if(work<100|money<700){wincon=false} else{} if(hour==6 && wincon==true){alert("you win")} else if(hour==6 && wincon==false){alert("you lose")} else{} },1);
+            setInterval(()=>{document.getElementById("power").innerText="power:" + power},1);
+            setInterval(()=>{power--},1000);
+            setInterval(()=>{if(power==0){document.body.style.backgroundColor = "black";document.getElementById("reboot").style.display="inline"}else{}},1);
+            const avloot = ["salmon", "tuna", "bottle", "can", "squid", "rockfish", "starfish"];
+            
+            function debounce (callback, delay){
+                let timeout;
+                return () => {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(callback, delay);
+                    }
+                }
+            
+            function fish(){
+                let ran = Math.floor(Math.random()*50);
+                if(ran==3){
+                    line = "broken";
+                    }
+                if(line=="broken"){
+                    alert("broken line");
+                    }
+                else{
+                if (bait>0){
+                power--;
+                saturation-=2;
+                bait--;
+                item = avloot[Math.floor(Math.random()*avloot.length)];
+                document.getElementById("loot").innerText = item;
+                    }
+                else{
+                    alert("not enough bait");
+                }
+                    }
+                }
+            
+            function charge(){
+                if (power<100){
+                power++;
+                    }
+                else{
+                    }
+                }
+
+            function drink(){
+                if(thirst<100){
+                thirst+=5;
+                    }
+                else{
+                    }
+                }
+
+            function oxy(){
+                if(van>0){
+                van--;
+                    }
+                else{
+                    }
+                }
+            function sell(){
+                let indi = document.getElementById("loot").innerText;
+                document.getElementById("loot").innerText=" ";
+                if(indi=="salmon"){
+                money += 15;
+                    }
+                else if(indi=="tuna"){
+                money += 20;
+                    }
+                else if(indi=="bottle"){
+                money += 1;
+                    }
+                else if(indi=="can"){
+                money += 1;
+                    }
+                else if(indi=="squid"){
+                money += 10;
+                    }
+                else if(indi=="rockfish"){
+                money += 5;
+                    }
+                else if(indi=="starfish"){
+                money += 30;
+                    }
+                else{
+                    alert("nothing to sell");
+                    }
+                }
+
+            function dowork(){
+                if(work<100){
+                let time = Math.floor(Math.random()*1000)+1000
+                setTimeout(()=>{work+=2;},time)
+                    }
+                else{
+                    }
+                }
+            
+            function eat(){
+                let indi = document.getElementById("loot").innerText;
+                document.getElementById("loot").innerText=" ";
+                if(indi=="salmon"){
+                saturation += 20;
+                    }
+                else if(indi=="tuna"){
+                saturation += 30;
+                    }
+                else if(indi=="bottle"){
+                saturation += 10;
+                    }
+                else if(indi=="can"){
+                saturation += 10;
+                    }
+                else if(indi=="squid"){
+                saturation += 25;
+                    }
+                else if(indi=="rockfish"){
+                saturation += 15;
+                    }
+                else if(indi=="starfish"){
+                saturation += 10;
+                    }
+                else{
+                    alert("nothing to eat");
+                    }
+                }
+            
+            function reboot(){
+                document.getElementById("reboot").style.display="none";
+                setTimeout(()=>{document.body.style.backgroundColor="white";power = 20;},2000);
+                }
+            
+            function shop(){
+                let user = prompt("wat do u wana buy 1.fish bait $100 2.fish line $20");
+                if (user==1){
+                    if(money>=10){
+                        bait += 50;
+                        money -= 100;
+                        }
+                    else{
+                        alert("you dont have enough money");
+                        }
+                    }
+                else if (user==2){
+                    if(money>=10){
+                        line = "fixed";
+                        money -= 20;
+                        }
+                    else{
+                        alert("you dont have enough money");
+                        }
+                    }
+                else{
+                    alert("unavailable")
+                    }
+                }
+            addEventListener("keypress", event => {if(event.key=="f"){fish();}})
+            addEventListener("keypress", event => {if(event.key=="s"){power--;sell();}})
+            addEventListener("keypress", event => {if(event.key=="e"){eat();}})
+            addEventListener("keypress", event => {if(event.key=="d"){drink();}})
+            addEventListener("keypress", event => {if(event.key=="i"){oxy();}})
+            addEventListener("keypress", event => {if(event.key=="w"){power--;dowork();}})
+            addEventListener("keypress", event => {if(event.key==" "){charge();}})
+        </script>
+    </body>
+</html>
